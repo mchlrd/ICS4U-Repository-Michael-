@@ -25,7 +25,7 @@ def predict_image(image_path):
         print(f"{i+1}: {label}, ({score:.2f})")
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python image_recognition.py <image_path>")
+        print("Usage: python inceptionv3_recognition.py <image_path>")
         sys.exit()
 
     image_path = sys.argv[1]

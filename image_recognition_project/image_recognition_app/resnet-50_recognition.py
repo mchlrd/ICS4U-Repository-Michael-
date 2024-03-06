@@ -24,7 +24,7 @@ def predict_image(image_path):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python resnet-50_recognition.py <image_path>")
+        print("Usage: python resnetRecognition.py <image_path>")
         sys.exit(1)
 
     image_path = sys.argv[1]

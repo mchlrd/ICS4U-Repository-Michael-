@@ -1,7 +1,7 @@
 import os
 
 source = "test1.txt"
-destination = "C:\\Users\\Larettie\\Desktop\\test1.txt"
+destination = "C:\\Users\\Michael\\Desktop\\test1.txt"
 
 try:
     if os.path.exists(destination):

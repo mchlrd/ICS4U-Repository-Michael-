@@ -1,0 +1,1 @@
+def constapant_counter()
