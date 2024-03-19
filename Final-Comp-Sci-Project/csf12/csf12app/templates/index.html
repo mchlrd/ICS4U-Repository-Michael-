@@ -22,7 +22,29 @@
     {% if user.is_authenticated %}
     <h3>Hello {{ fname }}</h3>
     <button type="submit"><a href="/signout"> SignOut</a></button>
+
+    <input type="file" id="fileInput" style="display: none;" accept="image/*">
+    <button onclick="openFileExplorer()">Choose an Image</button>
+    <script>
+        function openFileExplorer(){
+            document.getElementById('fileInput').click();
+        }
+    
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e){
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                document.body.appendChild(img);
+            }
+
+            reader.readAsDataURL(file);
+        })
+    </script>
     {% else %}
+    <h3>Welcome to #</h3>
     <button type='submit'><a href="/signup"> SignUp</a></button>
     <button type="submit"><a href="/signin"> SignIn</a></button>
     {% endif %}
