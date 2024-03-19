@@ -14,13 +14,12 @@
     </button>
     </div>
     {% endfor %}
-    <h3>Welcome to our Alpha Test</h3>
 
     {% if user.is_authenticated %}
     <h3>Hello {{ fname }}</h3>
-    <h4>You are successfully logged in</h4>
     <button type="submit"><a href="/signout"> SignOut</a></button>
     {% else %}
+    <h3>Welcome to our Alpha Test</h3>
     <button type='submit'><a href="/signup"> SignUp</a></button>
     <button type="submit"><a href="/signin"> SignIn</a></button>
     {% endif %}

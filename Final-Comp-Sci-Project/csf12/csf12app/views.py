@@ -48,7 +48,7 @@ def signup(request):
         #Welcome Email
 
         subject = "Welcome to the Alpha Test"
-        message = "Hello " + myuser.first_name + ".\n" + "Welcome to our Alpha Test\nThank you for visiting our webiste\n\n Sincerely,\nDeveloper Team"
+        message = "Hello " + myuser.first_name + ".\n" + "Welcome to our Alpha Test\nThank you for visiting our webiste\n\nSincerely,\nDeveloper Team"
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject,message,from_email,to_list, fail_silently=True)
