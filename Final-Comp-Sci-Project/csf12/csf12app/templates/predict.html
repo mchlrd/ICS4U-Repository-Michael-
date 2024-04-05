@@ -1,0 +1,42 @@
+<form id="uploadForm" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image" id="fileInput" style="display: none;" accept="image/*">
+    <button type="button" onclick="openFileExplorer()">Choose an Image</button>
+    <input type="submit" value="Predict">
+</form>
+
+<!-- Container for displaying the chosen image -->
+<div id="imageContainer"></div>
+
+<!-- Container for displaying predictions -->
+<div id="predictions"></div>
+
+<script>
+    function openFileExplorer() {
+        document.getElementById('fileInput').click();
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const formData = new FormData(this);
+
+        fetch('/predict', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.predictions) {
+                // Display predictions
+                const predictionsContainer = document.getElementById('predictions');
+                predictionsContainer.innerHTML = "<h4>Predictions:</h4><ul>";
+                data.predictions.forEach(prediction => {
+                    predictionsContainer.innerHTML += `<li>${prediction}</li>`;
+                });
+                predictionsContainer.innerHTML += "</ul>";
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>

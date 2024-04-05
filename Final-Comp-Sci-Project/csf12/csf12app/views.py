@@ -1,10 +1,12 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from csf12 import settings
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
+from .resnetRecognition import predict_image
 
 def home(request):
     return render(request, 'index.html')
@@ -45,8 +47,6 @@ def signup(request):
 
         messages.success(request, "Your account has been successfully created. Check your email.")
 
-        #Welcome Email
-
         subject = "Welcome to the Alpha Test"
         message = "Hello " + myuser.first_name + ".\n" + "Welcome to our Alpha Test\nThank you for visiting our webiste\n\nSincerely,\nDeveloper Team"
         from_email = settings.EMAIL_HOST_USER
@@ -67,7 +67,8 @@ def signin(request):
         if user is not None:
             login(request, user)
             fname = user.first_name
-            return render(request, "index.html", {'fname': fname})
+            request.session['fname'] = fname
+            return redirect('valid')
 
         else:
             messages.error(request, "Wrong Credentials")
@@ -79,3 +80,34 @@ def signout(request):
     logout(request)
     messages.success(request, "You are now logged out")
     return redirect('home')
+
+# views.py
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .resnetRecognition import predict_image
+
+def valid(request):
+    fname = request.session.get('fname')
+    if not fname:
+        messages.error(request, "Please sign in to access this page.")
+        return redirect('home')
+
+    return render(request, 'valid.html', {'fname': fname})
+
+def predict(request):
+        
+    if request.method == 'POST' and request.FILES.get('image'):
+        image_file = request.FILES['image']
+
+        with open('temp_image.jpg', 'wb') as f:
+            for chunk in image_file.chunks():
+                    f.write(chunk)
+        
+        predictions = predict_image('temp_image.jpg')
+
+        import os
+        os.remove('temp_image.jpg')
+        
+    return render(request, 'predict.html')
+    

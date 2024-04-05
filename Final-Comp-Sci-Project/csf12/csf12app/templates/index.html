@@ -20,33 +20,14 @@
     {% endfor %}
 
     {% if user.is_authenticated %}
-    <h3>Hello {{ fname }}</h3>
-    <button type="submit"><a href="/signout"> SignOut</a></button>
-
-    <input type="file" id="fileInput" style="display: none;" accept="image/*">
-    <button onclick="openFileExplorer()">Choose an Image</button>
-    <script>
-        function openFileExplorer(){
-            document.getElementById('fileInput').click();
-        }
-    
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e){
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                document.body.appendChild(img);
-            }
-
-            reader.readAsDataURL(file);
-        })
-    </script>
+    <h4>Your session is still active</h4>
+    <button type='submit'><a href="/valid">Redirect</a></button>
+    <h4>Log Out</h4>
+    <button type='submit'><a href='/signout'>Sign Out</a></button>
     {% else %}
     <h3>Welcome to #</h3>
-    <button type='submit'><a href="/signup"> SignUp</a></button>
-    <button type="submit"><a href="/signin"> SignIn</a></button>
+    <button type='submit'><a href="/signup"> Sign Up</a></button>
+    <button type="submit"><a href="/signin"> Sign In</a></button>
     {% endif %}
 </body>
 </html>
