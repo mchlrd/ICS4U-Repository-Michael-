@@ -1,4 +1,4 @@
-<form id="uploadForm" method="post" enctype="multipart/form-data">
+<form id="uploadForm" method="post" enctype="multipart/form-data" action='{% url 'predict' %}'>
     {% csrf_token %}
     <input type="file" name="image" id="fileInput" style="display: none;" accept="image/*">
     <button type="button" onclick="openFileExplorer()">Choose an Image</button>
@@ -17,7 +17,7 @@
     }
 
     document.getElementById('uploadForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
 
         const formData = new FormData(this);
 
@@ -28,7 +28,6 @@
         .then(response => response.json())
         .then(data => {
             if (data.predictions) {
-                // Display predictions
                 const predictionsContainer = document.getElementById('predictions');
                 predictionsContainer.innerHTML = "<h4>Predictions:</h4><ul>";
                 data.predictions.forEach(prediction => {

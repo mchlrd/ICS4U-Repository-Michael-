@@ -81,12 +81,6 @@ def signout(request):
     messages.success(request, "You are now logged out")
     return redirect('home')
 
-# views.py
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .resnetRecognition import predict_image
-
 def valid(request):
     fname = request.session.get('fname')
     if not fname:
@@ -108,6 +102,7 @@ def predict(request):
 
         import os
         os.remove('temp_image.jpg')
+        return JsonResponse({'predictions': predictions})
         
     return render(request, 'predict.html')
     

@@ -18,9 +18,14 @@ def predict_image(image_path):
     predictions = model.predict(preprocessed_image)
     decoded_predictions = decode_predictions(predictions, top=3)[0]
 
+    predicted_labels = []
+
     print("Predictions:")
     for i, (imagenet_id, label, score) in enumerate(decoded_predictions):
-        print(f"{i + 1}: {label} ({score:.2f})")
+        score_percent = int(score * 100)
+        predicted_labels.append(f'{i+1}: {label} ({score_percent}%)')
+
+    print(predicted_labels)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
