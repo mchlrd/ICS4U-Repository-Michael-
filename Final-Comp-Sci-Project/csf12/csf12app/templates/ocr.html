@@ -11,10 +11,31 @@
         {% csrf_token %}
         <input type="file" name="image" accept="image/*" required>
         <button type="submit">Extract Text</button>
+        <button type='submit'><a href='/valid'>Go Back</a></button> 
     </form>
 
     <div id="textContainer">
-        <!-- Display text !-->
+        <h2>Extracted Text:</h2>
+        <div id="extractedText"></div>  <!-- Display extracted text here -->
     </div>
+
+    <script>
+        document.getElementById('ocrForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch('/ocr', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const extractedTextContainer = document.getElementById('extractedText');
+                extractedTextContainer.textContent = data.extracted_text;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

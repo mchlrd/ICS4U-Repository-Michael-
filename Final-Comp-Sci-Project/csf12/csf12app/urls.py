@@ -11,4 +11,5 @@ urlpatterns = [
     path('valid/predict', predict, name='predict'),
     path('predict', predict, name='predict'),
     path('valid/ocr', ocr, name='ocr'),
+    path('ocr', ocr, name='ocr')
 ]
