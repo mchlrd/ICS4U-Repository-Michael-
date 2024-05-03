@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
@@ -7,6 +8,7 @@ from csf12 import settings
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from .resnetRecognition import predict_image
+from .ocr import ImageReader, Language, OS
 
 def home(request):
     return render(request, 'index.html')
@@ -47,8 +49,8 @@ def signup(request):
 
         messages.success(request, "Your account has been successfully created. Check your email.")
 
-        subject = "Welcome to the Alpha Test"
-        message = "Hello " + myuser.first_name + ".\n" + "Welcome to our Alpha Test\nThank you for visiting our webiste\n\nSincerely,\nDeveloper Team"
+        subject = "Welcome Email"
+        message = "Hello " + myuser.first_name + ".\n\n" + "Welcome to ###\nThank you for visiting our webiste\n\nSincerely,\nAdministration"
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject,message,from_email,to_list, fail_silently=True)
@@ -90,19 +92,49 @@ def valid(request):
     return render(request, 'valid.html', {'fname': fname})
 
 def predict(request):
-        
+    fname = request.session.get('fname')
+    if not fname:
+        messages.error(request, "Please sign in to access this page.")
+        return redirect('home')
+    
     if request.method == 'POST' and request.FILES.get('image'):
         image_file = request.FILES['image']
 
         with open('temp_image.jpg', 'wb') as f:
             for chunk in image_file.chunks():
-                    f.write(chunk)
-        
+                f.write(chunk)
+    
         predictions = predict_image('temp_image.jpg')
 
         import os
         os.remove('temp_image.jpg')
-        return JsonResponse({'predictions': predictions})
         
-    return render(request, 'predict.html')
+        return JsonResponse({'predictions': predictions})
     
+    return render(request, 'predict.html')
+
+def ocr(request):
+    fname = request.session.get('fname')
+    if not fname:
+        messages.error(request, 'Please sign in to access this page')
+        return redirect('home')
+
+    if request.method == 'POST' and request.FILES.get('image'):
+        image_file = request.FILES['image']
+
+
+        with open('temp_image.jpg', 'wb') as f:
+            for chunk in image_file.chunks():
+                f.write(chunk)
+
+        ir = ImageReader(OS.Windows)
+        extracted_text = ir.extract_text('temp_image.jpg', lang=Language.ENG)
+
+        import os
+
+        os.remove('temp_image.jpg')
+
+        return JsonResponse({'extracted_text': extracted_text})
+    
+    return render(request, 'ocr.html')
+

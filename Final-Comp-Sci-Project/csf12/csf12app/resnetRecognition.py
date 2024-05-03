@@ -25,7 +25,7 @@ def predict_image(image_path):
         score_percent = int(score * 100)
         predicted_labels.append(f'{i+1}: {label} ({score_percent}%)')
 
-    print(predicted_labels)
+    return predicted_labels
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

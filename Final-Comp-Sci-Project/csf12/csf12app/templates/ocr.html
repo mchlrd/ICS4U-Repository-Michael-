@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR</title>
+</head>
+<body>
+    <h1>OCR - Extract Text from Image</h1>
+    <form id="ocrForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Extract Text</button>
+    </form>
+
+    <div id="textContainer">
+        <!-- Display text !-->
+    </div>
+</body>
+</html>
