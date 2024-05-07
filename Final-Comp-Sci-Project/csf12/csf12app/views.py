@@ -138,3 +138,5 @@ def ocr(request):
     
     return render(request, 'ocr.html')
 
+def numberGuesser(request):
+    return render(request, 'numberGuesser.html')

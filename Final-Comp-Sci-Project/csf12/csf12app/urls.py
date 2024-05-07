@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home,signin,signup,signout, valid, predict, ocr
+from .views import home,signin,signup,signout, valid, predict, ocr, numberGuesser
 
 urlpatterns = [
     path('', home, name='home'),
@@ -11,5 +11,6 @@ urlpatterns = [
     path('valid/predict', predict, name='predict'),
     path('predict', predict, name='predict'),
     path('valid/ocr', ocr, name='ocr'),
-    path('ocr', ocr, name='ocr')
+    path('ocr', ocr, name='ocr'),
+    path('numberGuesser', numberGuesser, name='numberGuesser')
 ]
