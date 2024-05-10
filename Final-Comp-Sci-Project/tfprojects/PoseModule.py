@@ -38,11 +38,19 @@ class poseDetector():
 
 
 def main():
-    cap = cv2.VideoCapture('poserecmp4s/1.mp4')
+    cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("Error: Couldn't open the webcam.")
+        return
+
     pTime = 0
     detector = poseDetector()
     while True:
         success, img = cap.read()
+        if not success:
+            print("Error: Failed to capture frame from the webcam.")
+            break
+
         img = detector.findPose(img)
         lmList = detector.findPosition(img)
         print(lmList)
@@ -52,7 +60,12 @@ def main():
 
         cv2.putText(img, str(fps), (70,50), cv2.FONT_HERSHEY_PLAIN, 3, (255,255,255), 2)
         cv2.imshow("Image", img)
-        cv2.waitKey(1)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
 
 if __name__ == "__main__":
     main()

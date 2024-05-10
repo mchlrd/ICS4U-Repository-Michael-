@@ -6,33 +6,31 @@
     <title>Interactive Drawing Field</title>
     <style>
         #canvas {
-            border: 1px solid black; /* Add boundaries */
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas" width="500" height="300"></canvas>
-    <button id="clearButton">Clear</button>
-    <button id="submitButton">Submit</button>
+    <form id="guessForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <canvas id="canvas" width="500" height="300"></canvas>
+        <button id="clearButton" type="button">Clear</button>
+        <button id="submitButton" type="button">Submit</button>
+    </form>
+    <div id="result"></div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
-
             let isDrawing = false;
             let lastX = 0;
             let lastY = 0;
-
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseout', stopDrawing);
-
+    
             function startDrawing(e) {
                 isDrawing = true;
                 [lastX, lastY] = [e.offsetX, e.offsetY];
             }
-
+    
             function draw(e) {
                 if (!isDrawing) return;
                 ctx.beginPath();
@@ -41,39 +39,49 @@
                 ctx.stroke();
                 [lastX, lastY] = [e.offsetX, e.offsetY];
             }
-
+    
             function stopDrawing() {
                 isDrawing = false;
             }
-
+    
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+    
             const clearButton = document.getElementById('clearButton');
-            clearButton.addEventListener('click', clearCanvas);
-
-            function clearCanvas() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (clearButton) {
+                clearButton.addEventListener('click', function() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+            } else {
+                console.error('Clear button not found.');
             }
-
-            const submitButton = document.getElementById('submitButton');
-            submitButton.addEventListener('click', submitDrawing);
-
-            function submitDrawing() {
-                // Convert canvas to image file
-                const imgData = canvas.toDataURL('image/png');
-                const formData = new FormData();
-                formData.append('image', imgData);
-
-                // Send image data to server for processing
-                fetch('/process_image', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Prediction: ' + data.prediction);
-                })
-                .catch(error => console.error('Error:', error));
+    
+            const guessForm = document.getElementById('guessForm');
+            if (guessForm) {
+                guessForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent the default form submission
+    
+                    const formData = new FormData();
+                    formData.append('image', canvas.toDataURL('image/png'));
+                    formData.append('csrfmiddlewaretoken', document.querySelector('input[name="csrfmiddlewaretoken"]').value);
+    
+                    fetch('/numberGuesser', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultElement = document.getElementById('result');
+                        resultElement.textContent = 'Recognized Digit: ' + data['recognized_digit'];
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            } else {
+                console.error('Guess form not found.');
             }
         });
-    </script>
+    </script>      
 </body>
 </html>

@@ -9,6 +9,11 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from .resnetRecognition import predict_image
 from .ocr import ImageReader, Language, OS
+import cv2
+import numpy as np
+import tensorflow as tf
+import base64
+
 
 def home(request):
     return render(request, 'index.html')
@@ -139,4 +144,28 @@ def ocr(request):
     return render(request, 'ocr.html')
 
 def numberGuesser(request):
+    fname = request.session.get('fname')
+    if not fname:
+        messages.error(request, 'Please sign in to access this page')
+        return redirect('home')
+    
+    if request.method == 'POST' and request.POST.get('image'):
+        data = request.POST.get('image')
+        img_data = base64.b64decode(data.split(',')[1])
+
+        nparr = np.frombuffer(img_data, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_GRAYSCALE)
+        img = cv2.resize(img, (28, 28))
+        img = np.invert(img)
+        img = img.astype('float32') / 255.0
+        img = img.reshape(1, 28, 28, 1) 
+
+        model = tf.keras.models.load_model(r'C:\Users\Michael\Documents\compsci_grade12\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\csf12\csf12app\digit_recognition_model.h5')
+
+        predictions = model.predict(img)
+        recognized_digit = int(np.argmax(predictions[0]))
+        print(recognized_digit)
+
+        return JsonResponse({'recognized_digit': recognized_digit})
+    
     return render(request, 'numberGuesser.html')
