@@ -21,10 +21,10 @@ while True:
     if len(lmList) != 0:
         #Left arm
         angle = detector.findAngle(img, 11, 13, 15)
-        per = np.interp(angle, (80, 345), (0, 100)) #TROUBLESHOOT THIS
+        per = np.interp(angle, (80, 345), (0, 100)) #TROUBLESHOOT THIS <------------
         #print(angle, per)
         
-        #check for curls
+        #check for reps
 
         if per == 100:
             if dir == 0:
