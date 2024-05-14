@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import time
 
+from sympy import det
+
 import PoseModule as pm
 
 cap = cv2.VideoCapture(0)
@@ -21,7 +23,8 @@ while True:
     if len(lmList) != 0:
         #Left arm
         angle = detector.findAngle(img, 11, 13, 15)
-        per = np.interp(angle, (80, 345), (0, 100)) #TROUBLESHOOT THIS <------------
+        angle = detector.findAngle(img, 12, 14, 16)
+        per = np.interp(angle, (200, 320), (0, 100)) #TROUBLESHOOT THIS <------------
         #print(angle, per)
         
         #check for reps
@@ -36,7 +39,6 @@ while True:
                 dir = 0
 
         print(count)
-        cv2.rectangle(img, (0, 450), (250,720),(255,0,0), cv2.FILLED)
         cv2.putText(img, f'{int(count)}', (45,670), cv2.FONT_HERSHEY_PLAIN, 15, (255,255,255), 25)
 
     cTime = time.time()
