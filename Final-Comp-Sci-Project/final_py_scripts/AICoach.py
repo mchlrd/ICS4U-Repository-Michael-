@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import time
 
+from sympy import det
+
 import PoseModule as pm
 
 cap = cv2.VideoCapture(r'C:\Users\Michael\Documents\compsci_grade12\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\6.mp4')
@@ -21,7 +23,8 @@ while True:
     if len(lmList) != 0:
         #Left arm
         angle = detector.findAngle(img, 11, 13, 15)
-        per = np.interp(angle, (200, 315), (0, 100)) #TROUBLESHOOT THIS <------------
+        angle = detector.findAngle(img, 12, 14, 16)
+        per = np.interp(angle, (200, 320), (0, 100)) #TROUBLESHOOT THIS <------------
         #print(angle, per)
         
         #check for reps
@@ -36,7 +39,7 @@ while True:
                 dir = 0
 
         print(count)
-        cv2.putText(img, f'{int(count)}', (45,670), cv2.FONT_HERSHEY_PLAIN, 12, (255,255,255), 25)
+        cv2.putText(img, f'{int(count)}', (45,670), cv2.FONT_HERSHEY_PLAIN, 15, (255,255,255), 25)
 
     cTime = time.time()
     fps = 1/(cTime - pTime)
