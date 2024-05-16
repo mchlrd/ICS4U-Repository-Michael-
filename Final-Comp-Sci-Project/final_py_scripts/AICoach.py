@@ -3,6 +3,11 @@ import numpy as np
 import time
 
 from sympy import det
+<<<<<<< HEAD
+=======
+
+import PoseModule as pm
+>>>>>>> b4d572d4e0731a265fac51328ee3cf3c17bb98dd
 
 import PoseModule as pm
 #C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s
@@ -22,10 +27,17 @@ while True:
     #print(lmList)
 
     if len(lmList) != 0:
+<<<<<<< HEAD
         
         angle = detector.findAngle(img, 11, 13, 15) #Left arm
         #angle = detector.findAngle(img, 12, 14, 16) #Right arm
         per = np.interp(angle, (150, 50), (0, 100)) #TROUBLESHOOT THIS <------------
+=======
+        #Left arm
+        angle = detector.findAngle(img, 11, 13, 15)
+        angle = detector.findAngle(img, 12, 14, 16)
+        per = np.interp(angle, (200, 320), (0, 100)) #TROUBLESHOOT THIS <------------
+>>>>>>> b4d572d4e0731a265fac51328ee3cf3c17bb98dd
         #print(angle, per)
         
         #check for reps
