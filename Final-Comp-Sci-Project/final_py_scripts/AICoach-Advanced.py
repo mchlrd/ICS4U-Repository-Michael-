@@ -6,7 +6,7 @@ import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
-cap = cv2.VideoCapture(r'C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\9.mp4')
+cap = cv2.VideoCapture(r'C:\Users\Michael\Documents\compsci_grade12\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\7.mp4')
 
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
@@ -99,50 +99,50 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             # Visualize angles
 
             # Arm angles
-            cv2.putText(image, f"Left: {leftarm_angle}", tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(image, f"Right: {rightarm_angle}", tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
+            # cv2.putText(image, f"Left: {leftarm_angle}", tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
+            # cv2.putText(image, f"Right: {rightarm_angle}", tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
+            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
             
             # Leg angles
-            # cv2.putText(image, f'Left: {leftleg_angle}', tuple(np.multiply(left_knee, [640,480]).astype(int)),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2, cv2.LINE_AA)
-            # cv2.putText(image, f'Right: {rightleg_angle}', tuple(np.multiply(right_knee, [640,480]).astype(int)),
-            #             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2, cv2.LINE_AA)
+            cv2.putText(image, f'Left: {leftleg_angle}', tuple(np.multiply(left_knee, [640,480]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2, cv2.LINE_AA)
+            cv2.putText(image, f'Right: {rightleg_angle}', tuple(np.multiply(right_knee, [640,480]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2, cv2.LINE_AA)
 
             # Curl counter logic for left hand
-            if leftarm_angle > 165:
-                left_stage = "down"
-            if leftarm_angle < 80 and left_stage == 'down':
-                left_stage = "up"
-                left_counter += 1
-                print("Left Hand Reps:", left_counter)
+            # if leftarm_angle > 165:
+            #     left_stage = "down"
+            # if leftarm_angle < 80 and left_stage == 'down':
+            #     left_stage = "up"
+            #     left_counter += 1
+            #     print("Left Hand Reps:", left_counter)
 
             # #Logic for left leg
-            # if leftleg_angle > 140:
-            #     left_stage = 'down'
-            # if leftleg_angle < 110 and left_stage == 'down':
-            #     left_stage = 'up'
-            #     left_counter += 1
-            #     print('Left Leg Reps:', left_counter)
+            if leftleg_angle > 140:
+                left_stage = 'down'
+            if leftleg_angle < 110 and left_stage == 'down':
+                left_stage = 'up'
+                left_counter += 1
+                print('Left Leg Reps:', left_counter)
             
 
             # # Curl counter logic for right hand
-            if rightarm_angle > 165:
-                right_stage = "down"
-            if rightarm_angle < 80 and right_stage == 'down':
-                right_stage = "up"
-                right_counter += 1
-                print("Right Hand Reps:", right_counter)
+            # if rightarm_angle > 165:
+            #     right_stage = "down"
+            # if rightarm_angle < 80 and right_stage == 'down':
+            #     right_stage = "up"
+            #     right_counter += 1
+            #     print("Right Hand Reps:", right_counter)
 
             #Logic for right leg
 
-            # if rightleg_angle > 140:
-            #     right_stage = 'down'
-            # if rightleg_angle < 110 and right_stage == 'down':
-            #     right_stage = 'up'
-            #     right_counter += 1
-            #     print('Right Leg Reps:', right_counter)
+            if rightleg_angle > 140:
+                right_stage = 'down'
+            if rightleg_angle < 110 and right_stage == 'down':
+                right_stage = 'up'
+                right_counter += 1
+                print('Right Leg Reps:', right_counter)
 
             
         except Exception as e:
@@ -173,7 +173,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                                   mp_drawing.DrawingSpec(color=(245,117,66), thickness=3, circle_radius=4),
                                   mp_drawing.DrawingSpec(color=(245,66,230), thickness=3, circle_radius=4))
 
-        cv2.imshow('Mediapipe Feed', cv2.resize(image, (720, 1366)))
+        cv2.imshow('Mediapipe Feed', cv2.resize(image, (480, 640)))
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
