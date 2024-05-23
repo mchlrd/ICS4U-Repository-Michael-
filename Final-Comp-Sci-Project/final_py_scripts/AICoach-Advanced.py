@@ -6,7 +6,8 @@ import numpy as np
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
-cap = cv2.VideoCapture(r'C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\9.mp4')
+cap = cv2.VideoCapture(0)
+#r'C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\6.mp4'
 
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
@@ -173,7 +174,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                                   mp_drawing.DrawingSpec(color=(245,117,66), thickness=3, circle_radius=4),
                                   mp_drawing.DrawingSpec(color=(245,66,230), thickness=3, circle_radius=4))
 
-        cv2.imshow('Mediapipe Feed', cv2.resize(image, (720, 1366)))
+        cv2.imshow('Mediapipe Feed', cv2.resize(image, (480, 640)))
 
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
