@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-def home(request):
+def calorieCounter(request):
     import requests
     import json
 
@@ -18,6 +18,10 @@ def home(request):
         except Exception as e:
             api = 'Oops... There is an error ^_^'
             print(e)
-        return render(request, 'home.html', {'api': api})
+        return render(request, 'calorieCounter.html', {'api': api})
     else:
-        return render(request, 'home.html', {'api': None})
+        return render(request, 'calorieCounter.html', {'api': None})
+
+def welcome(request):
+
+    return render(request, 'welcome.html')
