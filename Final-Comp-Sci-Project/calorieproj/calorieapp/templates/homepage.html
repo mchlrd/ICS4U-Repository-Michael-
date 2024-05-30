@@ -1,0 +1,46 @@
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        font-size: 2.5rem;
+        color: #343a40;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: #6c757d;
+    }
+</style>
+<h1>Welcome to the Fitness Webpage</h1>
+<p>Your journey to fitness starts here.</p>
+{% endblock %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* Prevent scrolling */
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://broad-three-326832.framer.app/"></iframe>
+</body>
+</html>

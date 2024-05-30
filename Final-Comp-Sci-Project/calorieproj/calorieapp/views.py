@@ -22,6 +22,18 @@ def calorieCounter(request):
     else:
         return render(request, 'calorieCounter.html', {'api': None})
 
-def welcome(request):
+def homepage(request):
 
-    return render(request, 'welcome.html')
+    return render(request, 'homepage.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def support(request):
+    return render(request, 'support.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def signup(request):
+    return render(request, 'signup.html')
