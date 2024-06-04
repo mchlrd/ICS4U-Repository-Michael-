@@ -1,46 +1,102 @@
-{% comment %} {% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
-{% block content %}
-<style>
-    h1 {
-        font-size: 2.5rem;
-        color: #343a40;
-    }
-
-    p {
-        font-size: 1.2rem;
-        color: #6c757d;
-    }
-</style>
-<h1>Welcome to the Fitness Webpage</h1>
-<p>Your journey to fitness starts here.</p>
-{% endblock %} {% endcomment %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Homepage</title>
   <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden; /* Prevent scrolling */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: left; /* Align text container to the left */
+      height: 100vh;
+      overflow: hidden;
+      text-align: left; /* Align text to the left */
+      position: relative; /* Set position relative to the body */
     }
 
-    iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
+    .container {
+      max-width: 600px;
+      padding-left: 30px; /* Adjust this value as needed */
+      z-index: 1; /* Ensure it stays above the spline-viewer */
+    }
+
+    .highlight {
+      color: #1762E5;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 6rem;
+      font-weight: 600;
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+        white-space: normal;
+      }
+    }
+
+    .spline-viewer {
+      width: 50%; /* Set the width to ensure it fits within the viewport */
+      height: 100%; /* Make sure it takes up the full height */
+      position: absolute; /* Position the viewer absolutely */
+      right: 0; /* Move the viewer to the right */
+      top: 0; /* Align the viewer to the top */
+      z-index: 0; /* Ensure it stays below the container */
+      background-color: transparent; /* Ensure background is transparent */
+    }
+
+    .overlay {
+      position: absolute; /* Position the overlay absolutely */
+      bottom: 10px; /* Position it at the bottom */
+      right: 10px; /* Position it at the right */
+      width: 200px; /* Set the width to cover the button */
+      height: 60px; /* Set the height to cover the button */
+      background-color: #000000; /* Black background */
+      z-index: 2; /* Ensure it stays above the viewer and button */
+    }
+
+    .transparent-button {
+      position: absolute; /* Position the button absolutely */
+      right: 0; /* Align it with the spline-viewer */
+      top: 0; /* Align it with the spline-viewer */
+      width: 50%; /* Match the width of the spline-viewer */
+      height: 100%; /* Match the height of the spline-viewer */
+      background-color: rgba(0, 0, 0, 0); /* Make the button transparent */
+      border: none; /* Remove border */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      z-index: 1; /* Ensure it stays above the spline-viewer */
     }
   </style>
+  <script>
+    function redirectToSignup() {
+      window.location.href = "signup/";
+    }
+  </script>
 </head>
 <body>
-  <iframe src="https://broad-three-326832.framer.app/"></iframe>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.4.5/build/spline-viewer.js"></script>
+  <spline-viewer class="spline-viewer" url="https://prod.spline.design/WR3LieSq4LGSa-ry/scene.splinecode"></spline-viewer>
+  <div class="container">
+    <h1>
+      <span class="highlight">Smart</span> Assistant<br>
+      for <span class="highlight">Smart</span> Gains
+    </h1>
+  </div>
+  <button class="transparent-button" onclick="redirectToSignup()"></button>
+  <div class="overlay"></div> <!-- Add the overlay element here -->
 </body>
 </html>
