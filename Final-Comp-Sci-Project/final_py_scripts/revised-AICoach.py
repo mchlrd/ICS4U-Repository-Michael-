@@ -202,7 +202,8 @@ def main():
         print("Invalid choice")
         return
 
-    cap = cv2.VideoCapture(r'C:\Users\Michael\Documents\compsci_grade12\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\9.mp4')
+    cap = cv2.VideoCapture(r'C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s\9.mp4')
+    #C:\Users\Larettie\VSProjects\ICS4U-Repository-Michael-\Final-Comp-Sci-Project\aicoachmp4s
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
             ret, frame = cap.read()
@@ -234,7 +235,7 @@ def main():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=3, circle_radius=4),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=3, circle_radius=4))
 
-            cv2.imshow('Mediapipe Feed', cv2.resize(image, (480, 640)))
+            cv2.imshow('Mediapipe Feed', cv2.resize(image, (600, 800)))
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
