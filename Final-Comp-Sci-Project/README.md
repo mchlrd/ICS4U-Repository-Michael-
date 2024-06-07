@@ -13,3 +13,7 @@ The MealMetric project aims to offer users an intuitive web app for easily track
 By the end of the MealMetric project, I want to have developed a comprehensive and user-friendly web app that offers detailed nutritional insights and supports users in maintaining a balanced diet.
 
 A MealMetric web application will take HTML, CSS, JavaScript, open-sourced APIs, and Django on Python.
+
+# Installation
+
+use pip install requirements.txt to install all the extensions required for the projects to run
