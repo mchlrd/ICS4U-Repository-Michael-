@@ -16,4 +16,4 @@ A MealMetric web application will take HTML, CSS, JavaScript, open-sourced APIs,
 
 # Installation
 
-use pip install requirements.txt to install all the extensions required for the projects to run
+Use pip install requirements.txt to install all the extensions required for the projects to run
