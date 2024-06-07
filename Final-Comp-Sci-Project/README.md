@@ -2,7 +2,7 @@
 
 The ShapeUp project aims to provide users with a personalized Machine-Learning-driven fitness coach that tracks workouts for individual goals and needs, enhancing their fitness journey.
 
-By the end of the ShapeUp project, I want to have developed a fully functional AI-driven fitness coach app that provides and tracks user's movements throughout their workout routine.
+By the end of the ShapeUp project, I want to have developed a fully functional ML-driven fitness coach app that provides and tracks user's movements throughout their workout routine.
 
 A ShapeUp application will take the OpenComputerVision(OpenCV), MediaPipe, and NumPy on Python.
 
