@@ -17,3 +17,50 @@ A MealMetric web application will take HTML, CSS, JavaScript, open-sourced APIs,
 # Installation
 
 Use pip install requirements.txt to install all the extensions required for the projects to run
+
+# Running projects
+
+Cloning directory:
+
+```
+git clone https://github.com/mchlrd/ICS4U-Repository-Michael-/
+```
+
+# Run ShapeUp
+
+Head into the ShapeUp directory:
+
+```
+cd Final-Comp-Sci-Project/workoutScript/
+```
+
+Execute:
+
+```
+python mlWorkout.py
+```
+
+# Run MealMetric
+
+Head into the MealMetric directory:
+
+```
+cd Final-Comp-Sci-Project/calorieproj/
+```
+
+Execute:
+
+```
+python manage.py runserver
+```
+
+# Important note:
+
+The paths provided above are being headed from the home directory, to go back to the home directory use:
+
+```
+cd ..
+```
+
+You may have to use it a couple of times
+
