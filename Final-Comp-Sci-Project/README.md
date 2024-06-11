@@ -31,7 +31,7 @@ git clone https://github.com/mchlrd/ICS4U-Repository-Michael-/
 Head into the ShapeUp directory:
 
 ```
-cd Final-Comp-Sci-Project/workoutScript/
+cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/workoutScript/
 ```
 
 Execute:
@@ -45,7 +45,7 @@ python mlWorkout.py
 Head into the MealMetric directory:
 
 ```
-cd Final-Comp-Sci-Project/calorieproj/
+cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/calorieproj/
 ```
 
 Execute:
@@ -53,6 +53,16 @@ Execute:
 ```
 python manage.py runserver
 ```
+
+Heading to the link:
+
+After you run the MealMetric project you will see something like this:
+
+```
+Starting development server at http://127.0.0.1:8000/
+```
+
+To head to the link you can paste the http URL that was output into your browser or use **Ctrl + Click** on the URL in your terminal.
 
 # Important note:
 
