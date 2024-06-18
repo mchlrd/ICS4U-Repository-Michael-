@@ -26,12 +26,22 @@ Cloning directory:
 git clone https://github.com/mchlrd/ICS4U-Repository-Michael-/
 ```
 
+Installing required extensions:
+
+```
+cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/
+```
+
 # Run ShapeUp
 
 Head into the ShapeUp directory:
 
 ```
 cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/workoutScript/
+```
+
+```
+pip install requirements.txt
 ```
 
 Execute:
