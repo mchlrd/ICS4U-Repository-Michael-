@@ -32,16 +32,17 @@ Installing required extensions:
 cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/
 ```
 
+```
+pip install requirements.txt
+```
+
+
 # Run ShapeUp
 
 Head into the ShapeUp directory:
 
 ```
 cd ICS4U-Repository-Michael-/Final-Comp-Sci-Project/workoutScript/
-```
-
-```
-pip install requirements.txt
 ```
 
 Execute:
